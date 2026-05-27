@@ -1,0 +1,5 @@
+TripID,HotelID,CheckInDate,CheckOutDate,NumberOfNights,HotelName,City,Country,BookingReference
+TR-00912,HTL-4820,10.05.2026,14.05.2026,4,Hilton Austin,Austin,USA,T5Y8HQ
+TR-00915,HTL-1029,12.05.2026,14.05.2026,,Jumeirah Beach,Dubai,UAE,K9B3XP
+TR-00918,HTL-8839,14.05.2026,,0,Sheraton Chicago,Chicago,USA,M1N7QR
+TR-00920,HTL-0291,15.05.2026,20.06.2026,36,Marriott SFO,San Francisco,USA,L2V6TY

@@ -1,0 +1,5 @@
+TripID,TransportType,Vendor,Distance,Cost,BookingReference
+TR-00912,Taxi,Yellow Cab,,45.00,T5Y8HQ
+TR-00915,Train,Deutsche Bahn,35,12.50,K9B3XP
+TR-00920,Uber,Uber Business,,30.00,L2V6TY
+TR-00922,Car Rental,Hertz,120,85.00,R4W9ML

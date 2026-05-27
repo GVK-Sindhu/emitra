@@ -1,0 +1,65 @@
+# ============================================================
+# Python / Django
+# ============================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+
+# Virtual environment
+.venv/
+venv/
+env/
+ENV/
+
+# Django runtime
+db.sqlite3
+*.sqlite3
+staticfiles/
+media/
+
+# Secrets / env
+.env
+.env.*
+!.env.example
+
+# Django migrations — keep them (committed intentionally)
+# do NOT add: apps/*/migrations/
+
+# ============================================================
+# Node / Vite (Frontend)
+# ============================================================
+node_modules/
+dist/
+.vite/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ============================================================
+# OS / Editor
+# ============================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ============================================================
+# Compressed archives (raw folders are kept, zips are not)
+# ============================================================
+*.zip
+
+# ============================================================
+# Misc
+# ============================================================
+*.log
+*.pot
+*.mo

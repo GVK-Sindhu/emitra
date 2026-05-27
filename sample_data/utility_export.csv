@@ -1,0 +1,9 @@
+Meter ID,Billing Start,Billing End,Usage,Unit,Tariff,AccountNumber,ServicePointID,SiteName,BillingCycle,Demand_kW,Currency,BillAmount
+MTR-IND-001,2026-02-15,2026-03-14,4800,kWh,Industrial Peak,ACCT-99201-A,SP-8830129,Austin Warehouse,Monthly,45,USD,850.50
+MTR-IND-001,2026-03-15,2026-04-14,5200,kWh,Industrial Off-Peak,ACCT-99201-A,SP-8830129,Austin Warehouse,Monthly,40,USD,620.00
+MTR-IND-001,2026-04-15,2026-05-14,14500,kWh,Industrial Peak,ACCT-99201-A,SP-8830129,Austin Warehouse,Monthly,60,USD,2150.00
+MTR-IND-002,2026-04-01,2026-04-30,12,MWh,Green Tariff,ACCT-77301-B,SP-1120938,Munich R&D Lab,Monthly,85,EUR,1980.00
+MTR-IND-002,2026-05-01,2026-05-31,65000,kWh,Green Tariff,ACCT-77301-B,SP-1120938,Munich R&D Lab,Monthly,110,EUR,8450.00
+MTR-IND-003,2026-05-01,2026-05-31,-1200,kWh,Standard Tariff,ACCT-55402-C,SP-5561029,Denver Office,Monthly,0,USD,-150.00
+MTR-IND-004,2026-05-01,2026-05-31,0,kWh,Standard Tariff,ACCT-55402-D,SP-9938102,Phoenix Storage,Monthly,0,USD,75.00
+MTR-IND-005,2026-05-01,2026-05-31,850,kWh,Standard Tariff,ACCT-55402-E,,Houston Retail,Monthly,12,USD,145.00

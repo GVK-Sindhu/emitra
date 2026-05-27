@@ -1,0 +1,9 @@
+TripID,SegmentID,EmployeeID,Airline,FlightNumber,DepartureAirport,ArrivalAirport,DepartureDate,ArrivalDate,ClassOfService,Distance,DistanceUnit,Status,BookingReference
+TR-00912,SG-1,EMP-1001,Delta,DL120,JFK,LAX,10.05.2026,10.05.2026,Economy,,miles,Confirmed,T5Y8HQ
+TR-00912,SG-2,EMP-1001,Delta,DL120,JFK,LAX,10.05.2026,10.05.2026,Economy,,miles,Confirmed,T5Y8HQ
+TR-00915,SG-1,EMP-1002,Emirates,EK002,LHR,DXB,12.05.2026,12.05.2026,First Class,3420,miles,Confirmed,K9B3XP
+TR-00918,SG-1,EMP-1003,United,UA431,SFO,ORD,14.05.2026,14.05.2026,Business,,miles,Cancelled,M1N7QR
+TR-00920,SG-1,EMP-1004,American,AA882,LAX,JFK,15.05.2026,15.05.2026,Business,2475,miles,Confirmed,L2V6TY
+TR-00922,SG-1,EMP-1005,Delta,DL205,ATL,JFK,18.05.2026,18.05.2026,Business,760,miles,Confirmed,R4W9ML
+TR-00930,SG-1,EMP-1006,Lufthansa,LH401,JFK,FRA,20.05.2026,21.05.2026,Economy,3850,miles,Confirmed,P7K3WT
+TR-00930,SG-2,EMP-1006,Lufthansa,LH112,FRA,BOM,21.05.2026,22.05.2026,Economy,4080,miles,Confirmed,P7K3WT

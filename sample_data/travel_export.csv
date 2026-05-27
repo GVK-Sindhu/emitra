@@ -1,0 +1,6 @@
+Employee ID,Flight Type,From Airport,To Airport,Distance,Distance Unit,Hotel Nights,Ground Transport,Travel Date,Status,BookingReference
+EMP-1001,Domestic,JFK,LAX,,miles,4,Taxi,10.05.2026,Confirmed,T5Y8HQ
+EMP-1002,International,LHR,DXB,3420,miles,2,Train (35 miles),12.05.2026,Confirmed,K9B3XP
+EMP-1003,Domestic,SFO,ORD,,miles,45,Uber,14.05.2026,Cancelled,M1N7QR
+EMP-1004,Domestic,LAX,JFK,2475,miles,3,Rental Car,15.05.2026,Confirmed,L2V6TY
+EMP-1005,Domestic,ATL,JFK,760,miles,0,,18.05.2026,Confirmed,R4W9ML
