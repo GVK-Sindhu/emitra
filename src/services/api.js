@@ -4,7 +4,7 @@ import axios from 'axios';
 const DEFAULT_ORG_ID = 'a5804ec1-bdce-4ab7-8b15-773b9c84897b';
 
 const apiClient = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_API_URL || '/api',
 });
 
 // Centralized request interceptor to enforce tenant header injection across all API calls
