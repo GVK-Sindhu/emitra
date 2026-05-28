@@ -5,11 +5,18 @@ const DEFAULT_ORG_ID = 'a5804ec1-bdce-4ab7-8b15-773b9c84897b';
 
 const apiClient = axios.create({
   baseURL: '/api',
-  headers: {
-    'Content-Type': 'application/json',
-    'X-Organization-ID': DEFAULT_ORG_ID,
-  },
 });
+
+// Centralized request interceptor to enforce tenant header injection across all API calls
+apiClient.interceptors.request.use(
+  (config) => {
+    config.headers['X-Organization-ID'] = DEFAULT_ORG_ID;
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export const api = {
   // 1. Dashboard metrics
