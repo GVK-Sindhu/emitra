@@ -7,7 +7,6 @@ Emitra is a prototype platform designed for greenhouse gas (GHG) emissions data 
 - **Frontend URL**: [https://emitra-two.vercel.app](https://emitra-two.vercel.app)
 - **Backend URL**: [https://emitra-backend-lpg5.onrender.com/api/](https://emitra-backend-lpg5.onrender.com/api/)
 - **Demo User**: `analyst@acme.com`
-- **Default Organization ID**: `3d98e046-70ca-4ebe-9b1f-03244b591b3b`
 
 ## Assignment Scope
 
