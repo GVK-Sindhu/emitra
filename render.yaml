@@ -21,10 +21,11 @@ services:
         value: "https://emitra-frontend.onrender.com"
 
   # Frontend: Vite React (Static Site)
-  - type: static_site
+  - type: web
     name: emitra-frontend
+    runtime: static
     buildCommand: "npm install && npm run build"
-    publishDir: "dist"
+    staticPublishPath: "dist"
     plan: free
     routes:
       - type: rewrite
