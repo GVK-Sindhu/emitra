@@ -4,12 +4,12 @@
 
 /* Custom premium styles */
 .glassmorphism {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .table-row-hover:hover {
-  background-color: rgba(30, 41, 59, 0.5);
+  background-color: rgba(243, 244, 246, 0.8);
   transition: background-color 0.2s ease;
 }

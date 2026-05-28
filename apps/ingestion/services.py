@@ -15,6 +15,10 @@ from apps.emissions.services import (
 )
 import datetime
 
+class NormalizationError(Exception):
+    """Exception raised when raw record normalization fails validation or is blank."""
+    pass
+
 def parse_date(date_str) -> datetime.date | None:
     """
     Parses date string in formats DD.MM.YYYY, YYYY-MM-DD, MM/DD/YYYY, DD-MM-YYYY etc.
@@ -34,7 +38,9 @@ SAP_HEADER_MAPPING = {
     'werkcode': 'Plant Code',
     'werksnummer': 'Plant Code',
     'plant code': 'Plant Code',
+    'plantcode': 'Plant Code',
     'materialnummer': 'Material',
+    'materialnumber': 'Material',
     'material': 'Material',
     'menge': 'Fuel Quantity',
     'fuel quantity': 'Fuel Quantity',
@@ -44,8 +50,19 @@ SAP_HEADER_MAPPING = {
     'posting date': 'Posting Date',
     'lieferant': 'Vendor',
     'vendor': 'Vendor',
+    'suppliername': 'Vendor',
+    'suppliercode': 'Supplier Code',
+    'supplier code': 'Supplier Code',
     'kostenstelle': 'Cost Center',
-    'cost center': 'Cost Center'
+    'cost center': 'Cost Center',
+    'purchaseordernumber': 'Purchase Order Number',
+    'purchase order number': 'Purchase Order Number',
+    'documentnumber': 'Document Number',
+    'document number': 'Document Number',
+    'itemnumber': 'Item Number',
+    'item number': 'Item Number',
+    'movementtype': 'Movement Type',
+    'movement type': 'Movement Type'
 }
 
 def ingest_data_source(datasource_id):
@@ -85,8 +102,15 @@ def ingest_data_source(datasource_id):
     with transaction.atomic():
         for index, row in df.iterrows():
             row_dict = row.to_dict()
-            # Remove any keys that are None or empty strings
-            cleaned_row = {str(k).strip(): v for k, v in row_dict.items() if k is not None}
+            # Clean values: convert pandas/numpy NaNs and "nan" strings to None for valid JSON serialization
+            cleaned_row = {}
+            for k, v in row_dict.items():
+                if k is not None:
+                    k_str = str(k).strip()
+                    if pd.isna(v) or str(v).strip().lower() in ('nan', 'none', ''):
+                        cleaned_row[k_str] = None
+                    else:
+                        cleaned_row[k_str] = str(v).strip()
             
             # For SAP, normalize German headers
             if datasource.source_type == SourceType.SAP:
@@ -113,6 +137,8 @@ def ingest_data_source(datasource_id):
         try:
             process_single_raw_record(raw_rec)
             success_count += 1
+        except NormalizationError:
+            fail_count += 1
         except Exception as e:
             raw_rec.processing_status = ProcessingStatus.FAILED
             raw_rec.error_message = f"System normalization crash: {str(e)}"
@@ -139,8 +165,28 @@ def process_single_raw_record(raw_record):
     raw_json = raw_record.raw_json
     source_type = datasource.source_type
 
+    # A. Check if completely empty/blank row (all values are None or empty/whitespace strings)
+    if not raw_json or all(v is None or str(v).strip() == "" for v in raw_json.values()):
+        with transaction.atomic():
+            raw_record.processing_status = ProcessingStatus.FAILED
+            raw_record.error_message = "Blank row ignored"
+            raw_record.save()
+            # Prevent creation and ensure we clean up any existing duplicate/processed records
+            EmissionRecord.objects.filter(raw_record=raw_record).delete()
+        raise NormalizationError("Blank row detected")
+
     # 1. Base validation check (missing values, negatives, invalid airport codes)
     is_suspicious, suspicious_reason = validate_record(source_type, raw_json)
+    
+    # B. If required fields are missing, mark as FAILED and abort EmissionRecord creation
+    if suspicious_reason and "Missing required field" in suspicious_reason:
+        with transaction.atomic():
+            raw_record.processing_status = ProcessingStatus.FAILED
+            raw_record.error_message = suspicious_reason
+            raw_record.save()
+            EmissionRecord.objects.filter(raw_record=raw_record).delete()
+        raise NormalizationError(suspicious_reason)
+
     reasons = [suspicious_reason] if suspicious_reason else []
 
     calc_results = {}

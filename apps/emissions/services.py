@@ -385,5 +385,15 @@ def validate_record(source_type: str, raw_json: dict) -> tuple[bool, str]:
                 suspicious = True
                 reasons.append("Distance is missing, and unable to estimate due to missing airport coordinates")
 
+        # Check if required travel activity fields are missing
+        flight_type = raw_json.get('Flight Type', raw_json.get('ClassOfService', ''))
+        ground = raw_json.get('Ground Transport', raw_json.get('TransportType', ''))
+        has_flight = bool(from_ap or to_ap or flight_type or clean_decimal(distance_str) > 0)
+        has_hotel = bool(clean_decimal(hotel_nights_str) > 0 or raw_json.get('CheckInDate'))
+        has_ground = bool(ground)
+        if not (has_flight or has_hotel or has_ground):
+            suspicious = True
+            reasons.append("Missing required field: Travel activity details")
+
     reason_str = "; ".join(reasons) if reasons else None
     return suspicious, reason_str

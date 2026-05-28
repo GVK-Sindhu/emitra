@@ -35,58 +35,58 @@ export default function AuditLogPage() {
   return (
     <div className="space-y-6">
       {/* Search and Header */}
-      <div className="bg-slate-950/40 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h3 className="text-sm font-semibold text-slate-300 uppercase tracking-wider">Enterprise Compliance Audit Trail</h3>
-          <p className="text-[10px] text-slate-500 mt-1">Immutable log of all modifications, corrections, and regulatory approvals.</p>
+          <h3 className="text-sm font-semibold text-gray-800 uppercase tracking-wider">Enterprise Compliance Audit Trail</h3>
+          <p className="text-[10px] text-gray-400 mt-1">Immutable log of all modifications, corrections, and regulatory approvals.</p>
         </div>
 
         <div className="relative">
-          <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-500" />
+          <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
           <input
             type="text"
             placeholder="Search by analyst or reason..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="bg-slate-900 border border-slate-800 text-slate-200 text-xs rounded-lg pl-9 pr-4 py-2 focus:ring-1 focus:ring-brand-500 outline-none w-full md:w-64"
+            className="bg-white border border-gray-200 text-gray-800 text-xs rounded-lg pl-9 pr-4 py-2 focus:ring-1 focus:ring-brand-500 outline-none w-full md:w-64"
           />
         </div>
       </div>
 
       {/* Logs timeline / list */}
       {loading ? (
-        <div className="text-center py-12 text-slate-500 text-xs">
+        <div className="text-center py-12 text-gray-500 text-xs">
           Loading audit trail history...
         </div>
       ) : filteredLogs.length === 0 ? (
-        <div className="bg-slate-950/40 border border-slate-800 rounded-2xl p-12 text-center text-slate-500 text-xs">
+        <div className="bg-white border border-gray-200 rounded-2xl p-12 text-center text-gray-500 text-xs">
           No audit log records found matching the search criteria.
         </div>
       ) : (
         <div className="space-y-4">
           {filteredLogs.map((log) => (
-            <div key={log.id} className="bg-slate-950/40 border border-slate-800 hover:border-slate-700/80 rounded-2xl p-5 shadow-lg transition-all text-xs">
-              <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-800 pb-3 mb-3 gap-2">
+            <div key={log.id} className="bg-white border border-gray-200 hover:border-gray-300 rounded-2xl p-5 shadow-sm transition-all text-xs">
+              <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-gray-100 pb-3 mb-3 gap-2">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded bg-slate-900 border border-slate-800 text-slate-300">
-                    <UserCheck className="h-4.5 w-4.5 text-brand-500" />
+                  <div className="p-2 rounded bg-gray-50 border border-gray-200 text-gray-700">
+                    <UserCheck className="h-4.5 w-4.5 text-brand-600" />
                   </div>
                   <div>
-                    <p className="font-semibold text-slate-200">{log.changed_by}</p>
-                    <p className="text-[10px] text-slate-500 font-mono mt-0.5">Record ID: {log.emission_record}</p>
+                    <p className="font-semibold text-gray-800">{log.changed_by}</p>
+                    <p className="text-[10px] text-gray-400 font-mono mt-0.5">Record ID: {log.emission_record}</p>
                   </div>
                 </div>
                 
                 <div className="text-right">
-                  <p className="text-[10px] text-slate-400 font-semibold">{new Date(log.timestamp).toLocaleString()}</p>
-                  <p className="text-[9px] text-slate-600 font-mono mt-0.5">Audit Event ID: {log.id}</p>
+                  <p className="text-[10px] text-gray-500 font-semibold">{new Date(log.timestamp).toLocaleString()}</p>
+                  <p className="text-[9px] text-gray-400 font-mono mt-0.5">Audit Event ID: {log.id}</p>
                 </div>
               </div>
 
               {/* Reason card */}
-              <div className="bg-amber-500/5 border border-amber-500/10 rounded-xl p-3 mb-4">
-                <p className="text-slate-300 font-medium leading-relaxed">
-                  <span className="text-amber-500 font-semibold uppercase text-[9px] tracking-wider bg-amber-500/10 border border-amber-500/20 px-1.5 py-0.5 rounded mr-2 font-mono">
+              <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 mb-4">
+                <p className="text-gray-800 font-medium leading-relaxed">
+                  <span className="text-amber-700 font-semibold uppercase text-[9px] tracking-wider bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded mr-2 font-mono">
                     Justification
                   </span>
                   {log.change_reason}
@@ -94,9 +94,9 @@ export default function AuditLogPage() {
               </div>
 
               {/* State transition deltas */}
-              <div className="bg-slate-950 p-4 rounded-xl border border-slate-900 font-mono text-[10px] text-slate-400 space-y-2">
-                <p className="text-slate-500 font-semibold pb-1.5 border-b border-slate-900 flex items-center gap-1.5 font-sans text-xs">
-                  <History className="h-3.5 w-3.5 text-slate-500" />
+              <div className="bg-gray-50 p-4 rounded-xl border border-gray-200 font-mono text-[10px] text-gray-650 space-y-2">
+                <p className="text-gray-500 font-semibold pb-1.5 border-b border-gray-200 flex items-center gap-1.5 font-sans text-xs">
+                  <History className="h-3.5 w-3.5 text-gray-405" />
                   State Transitions
                 </p>
                 
@@ -106,12 +106,12 @@ export default function AuditLogPage() {
                     const newVal = log.new_value[key];
                     if (oldVal !== newVal) {
                       return (
-                        <div key={key} className="flex items-center justify-between border-b border-slate-900/40 py-1">
-                          <span className="text-slate-400 font-sans">{key}</span>
+                        <div key={key} className="flex items-center justify-between border-b border-gray-200/40 py-1">
+                          <span className="text-gray-550 font-sans">{key}</span>
                           <div className="flex items-center gap-2">
-                            <span className="text-rose-500 bg-rose-500/5 px-1.5 py-0.5 rounded line-through">{String(oldVal)}</span>
-                            <ArrowRight className="h-3 w-3 text-slate-600" />
-                            <span className="text-emerald-500 bg-emerald-500/5 px-1.5 py-0.5 rounded font-bold">{String(newVal)}</span>
+                            <span className="text-rose-600 bg-rose-50 px-1.5 py-0.5 rounded line-through">{String(oldVal)}</span>
+                            <ArrowRight className="h-3 w-3 text-gray-400" />
+                            <span className="text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded font-bold">{String(newVal)}</span>
                           </div>
                         </div>
                       );
