@@ -3,8 +3,20 @@ import axios from 'axios';
 // Default organization ID resolved during database seeding
 const DEFAULT_ORG_ID = import.meta.env.VITE_ORG_ID || '3d98e046-70ca-4ebe-9b1f-03244b591b3b';
 
+const getBaseURL = () => {
+  let url = import.meta.env.VITE_API_URL;
+  if (url) {
+    url = url.trim().replace(/\/+$/, '');
+    if (!url.endsWith('/api')) {
+      url = `${url}/api`;
+    }
+    return url;
+  }
+  return '/api';
+};
+
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  baseURL: getBaseURL(),
 });
 
 // Centralized request interceptor to enforce tenant header injection across all API calls
