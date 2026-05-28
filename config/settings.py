@@ -127,6 +127,12 @@ else:
         'https://emitra-frontend.onrender.com'
     ).split(',')
 
+from corsheaders.defaults import default_headers
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    "x-organization-id",
+]
+
 # REST Framework configuration
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
