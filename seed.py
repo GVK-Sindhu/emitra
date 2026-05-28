@@ -9,7 +9,8 @@ def seed_db():
     
     print("Seeding database...")
     org, created = Organization.objects.get_or_create(
-        name="Acme Corporation"
+        id="3d98e046-70ca-4ebe-9b1f-03244b591b3b",
+        defaults={"name": "Acme Corporation"}
     )
     
     if created:

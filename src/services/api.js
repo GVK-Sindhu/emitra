@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Default organization ID resolved during database seeding
-const DEFAULT_ORG_ID = 'a5804ec1-bdce-4ab7-8b15-773b9c84897b';
+const DEFAULT_ORG_ID = import.meta.env.VITE_ORG_ID || '3d98e046-70ca-4ebe-9b1f-03244b591b3b';
 
 const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '/api',
